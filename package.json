@@ -1,0 +1,28 @@
+{
+  "name": "water-sound-api",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Express.js API to receive and process sound data from an external microphone",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fritzschack/water-sound-api.git"
+  },
+  "author": "Friedrich Schack",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fritzschack/water-sound-api/issues"
+  },
+  "homepage": "https://github.com/fritzschack/water-sound-api#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
