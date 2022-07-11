@@ -3,7 +3,7 @@ import { Router } from "express"
 import {
   recordings_index,
   recordings_create
-} from "../controllers/recordings.js"
+} from "../controllers/recording.controller.js"
 
 const router = Router()
 

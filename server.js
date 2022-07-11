@@ -1,9 +1,15 @@
 import express from "express"
 import morgan from "morgan"
-import routes from "./routes/index.js"
+import cors from "cors"
+import routes from "./routes/index.router.js"
+import fileUpload from "express-fileupload"
 
 const server = express()
 
+server.use(fileUpload({
+  createParentPath: true
+}))
+server.use(cors())
 server.use(express.json())
 server.use(express.urlencoded({ extended: true }))
 server.use(morgan("dev", {}))

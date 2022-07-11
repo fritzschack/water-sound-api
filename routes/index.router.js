@@ -1,5 +1,5 @@
 import { Router } from "express"
-import recordingsRoutes from "./recordings.js"
+import recordingsRoutes from "./recording.router.js"
 
 const router = Router()
 
