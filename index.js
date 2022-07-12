@@ -4,19 +4,16 @@ import dotenv from "dotenv"
 
 dotenv.config()
 
-const port = process.env.PORT || 5000
-
+// Connect to database
 mongoose.connect(
   process.env.DB_URL,
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  },
-  () => {
-    console.log("Connected to database.")
-  }
+  { useNewUrlParser: true, useUnifiedTopology: true },
+  () => console.log("Connected to database.")
 )
 
+const port = process.env.PORT || 5000
+
+// Start server on specified port
 server.listen(port, () => {
   console.log(`Server started on port ${port}.`)
 })

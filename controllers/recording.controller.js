@@ -1,6 +1,8 @@
 import Recording from "../models/recording.model.js"
-import {deleteFile, getPresignedUrlForFile, uploadFile} from "../utils/s3.js"
+import { deleteFile, getPresignedUrlForFile, uploadFile } from "../utils/s3.js"
+import { unlink } from "fs/promises"
 
+// For a list of recording instances, enrich with presigned URL for downloading the respective files
 async function getPresignedUrls (recordings) {
   let results = []
   for (const recording of recordings) {
@@ -10,6 +12,7 @@ async function getPresignedUrls (recordings) {
   return results
 }
 
+// Return all recordings
 export async function recordings_index (req, res) {
   try {
     let recordings = await Recording.find()
@@ -21,6 +24,7 @@ export async function recordings_index (req, res) {
   }
 }
 
+// Create recording
 export async function recordings_create (req, res) {
   try {
     const { recording } = req.files
@@ -29,6 +33,7 @@ export async function recordings_create (req, res) {
     } else {
       await recording.mv("./uploads/" + recording.name)
       await uploadFile(recording)
+      await unlink("./uploads/" + recording.name)
       let instance = await Recording.create({ name: recording.name, size: recording.size, createdAt: Date.now() })
       return res.status(201).json({ message: "Recording is uploaded.", data: instance })
     }
@@ -37,6 +42,7 @@ export async function recordings_create (req, res) {
   }
 }
 
+// Delete recording
 export async function recordings_delete (req, res) {
   try {
     const { id } = req.params
