@@ -1,6 +1,5 @@
 import mongoose from "mongoose"
 import { v4 as uuid } from "uuid"
-import {getPresignedUrlForFile} from "../utils/s3.js";
 
 const recordingSchema = new mongoose.Schema({
   _id: {
