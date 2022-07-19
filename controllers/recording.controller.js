@@ -28,13 +28,18 @@ export async function recordings_index (req, res) {
 export async function recordings_create (req, res) {
   try {
     const { recording } = req.files
+    const createdAt = req.body["created_at"] || Date.now()
     if (!recording) {
       return res.status(409).json({ error: "No file uploaded." })
     } else {
       await recording.mv("./uploads/" + recording.name)
       await uploadFile(recording)
       await unlink("./uploads/" + recording.name)
-      let instance = await Recording.create({ name: recording.name, size: recording.size, createdAt: Date.now() })
+      let instance = await Recording.create({
+        name: recording.name,
+        size: recording.size,
+        createdAt: createdAt
+      })
       return res.status(201).json({ message: "Recording is uploaded.", data: instance })
     }
   } catch(error) {
